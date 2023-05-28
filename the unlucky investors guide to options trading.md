@@ -7,7 +7,7 @@
    + 但是提高交易次数是不容易的。因为卖期权是找高IV时候建仓，以提高成功率。但是， 以SPY为例， 高IV 只占很小比例， 如：
    
 
-        ###    VIX Data ( 2005 - 2021 ) 
+        ### Table   VIX Data ( 2005 - 2021 ) 
         | VIX Range   | % of Occurrences |
         |----------|-------------:|
         | 0-15 |  43% | 
@@ -18,7 +18,7 @@
  -  为了提高交易次数，不得不在低IV时候，也建仓。下表表示低IV 也可以盈利。
 
       
-       ###    SPY Strangle Data ( 2005 - 2021 ) 
+       ###  Table  SPY Strangle Data ( 2005 - 2021 ) 
        | VIX Range   | Pob of Profit | Average P/L |
        |----------|-------------:|:------------|
        | 0-15 |  82% |  $20 |
@@ -30,15 +30,26 @@
    
       * IV 低  $\rightarrow$ 资产配置比例少，但不少于 $`{25 \%}`$. 否则收益过少。
       * IV 高或者变高的过程  $\rightarrow$ 资产配置比例加大，但不超过 $`50 \%`$， 以防曝险。
-        
+      * 分配给短期权保费的资金也不应过于集中于单个头寸。一个适当规模的头寸不应占据超过投资组合资金的**5%**至**7%**  
 
 
-
-           ###   Guidelines for allocating portfolio capital according to market IV. 
+           ###  Table Guidelines for allocating portfolio capital according to market IV. 
            | VIX Range   | Max Portfolio Allocation|
            |----------|-------------:|
-            0-15 |  25%  
-            15-25 | 30%  
-            25-35 | 35% 
-            35+ | 50% 
+           | 0-15 |  25% |  
+           | 15-25 | 30% | 
+           | 25-35 | 35%  |
+           | 35+ | 50% |
 
+   + 提前关闭仓位的好处 
+      - 避免 $\gamma$ 风险。
+        越接近到期日，期权越受到股价异动的影响，即 $\gamma$ 随着接近到期日变大，提前关仓可以避免在期权整个久期的后半程，受到波动的影响。  
+      - 由于时间短了，则可以提高资金效率，从而**提高交易次数**  
+        ###  Table SPY Strangle Statistics (2005–2021)
+        | Statistics                     | Held to Expiration | Managed at **21** DTE |
+        |--------------------------------|-------------------|------------------|
+        | POP                            |       81%         |       79%        |
+        | Average P/L                    |       $44         |       $30        |
+        | Average Daily P/L              |     $1.29         |     $1.60        |
+        | Standard Deviation of P/L      |      $614         |      ${\color{green}$260}$        |
+        | CVaR (5%)                      |     –$1,535       |     ${\color{green}–$695}$        |
