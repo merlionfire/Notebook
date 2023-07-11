@@ -119,3 +119,38 @@ market volatility, using SPY strangle data from 2005–2021.
       
       * 因为多头认购头寸与多头股票头寸相比，风险资本减少了94% ( $5000 -> $280 ) ，但获得了相同的盈利潜力。
       * 空头认沽头寸可能会亏损初次投资的数倍，但具有比多头股票头寸更高的可能性盈利（POP = 60%），且需要较少的资本（减少60% -> $2000 vs $ 5000）。
+
+
+# Chapter 5 Constructing a Trade
+
+   构造期权合约需要的6个步骤
+ 1. Choose an asset universe.
+
+    - A **high** open interest or volumne across strikes ( > **a few hundred** / strike )
+    - A **tight** bid-ask spread ( < $`1 \%`$ of the contract price )
+    - A available contract with several strike prices and expiration dates.
+   
+ 2. Choose an Underlying
+
+       Table  - General pros and cons for **stock** and **ETF** 
+      | Stocks |  | ETFs | | 
+      | --- | --- | --- | --- |
+      | Pros | Cons | Pros | Cons |
+      | Tend to have options with higher credits and higher profit potentials | Single‐company risk factors | Inherently diversified across sectors or markets | Limited selection compared to stocks |
+      | Frequent high implied volatility (IV) conditions | Earnings and dividend risk | Tend to have options with lower BPRs and are still highly liquid | High IV conditions are not common |
+
+    选择标的资产时，交易所需的资本是一个限制因素。单个头寸通常不应占据组合资本的**5%**至**7%**，``这意味着股票标的可能不适合小账户，因为它们的交易成本更高``。
+   
+    然而，由于在IV升高时**卖出**期权有几个好处，股票标的在某些情况下可能是更好的标的
+    - 由于股票面临公司和行业特定的风险，因此它们往往与**ETF**相比具有更高的波动率，并且往往"更容易出现波动率升高的机会"。请注意，如果交易股票期权，投资者还应注意可能推动这些IV膨胀期的上下文信息（例如，盈利报告日期，公司公告），因为它可能会影响策略选择。在使用ETF标的交易期权时，这种做法就不那么重要了
+    - 附加的风险因素（加上流动性股票通常比ETF更昂贵的事实）导致股票期权在合同期间通常具有**更大**的**盈利**和**亏损**波动，更多的P / L变化以及更多的尾部风险。如果交易的资本要求不过分，并且基础资产的IV有利，则这些将是考虑的下一个因素。总的来说，"股票期权通常更具风险，但也具有比ETF期权更高的利润潜力"
+
+   
+Single‐company risk factors
+
+ 3. 
+
+
+ 
+
+ 4. 
