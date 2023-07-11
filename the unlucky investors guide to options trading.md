@@ -145,12 +145,51 @@ market volatility, using SPY strangle data from 2005–2021.
     - 由于股票面临公司和行业特定的风险，因此它们往往与**ETF**相比具有更高的波动率，并且往往"更容易出现波动率升高的机会"。请注意，如果交易股票期权，投资者还应注意可能推动这些IV膨胀期的上下文信息（例如，盈利报告日期，公司公告），因为它可能会影响策略选择。在使用ETF标的交易期权时，这种做法就不那么重要了
     - 附加的风险因素（加上流动性股票通常比ETF更昂贵的事实）导致股票期权在合同期间通常具有**更大**的**盈利**和**亏损**波动，更多的P / L变化以及更多的尾部风险。如果交易的资本要求不过分，并且基础资产的IV有利，则这些将是考虑的下一个因素。总的来说，"股票期权通常更具风险，但也具有比ETF期权更高的利润潜力"
 
-   
-Single‐company risk factors
+     ### Table-  Options P/L and probability of profit (POP) statistics 45 days to expiration (DTE) 16 $\Delta$ strangles with six different underlyings, held to expiration, from 2009–2020. Assets include SPY (S&P 500 ETF), GLD (gold commodity ETF), SLV. 
+     | Asset | Underlying | Average Profit | Average Loss | POP |
+     | --- | --- | --- | --- | --- |
+     | ETFs | SPY | $160 | –$297 | 82% |
+     | ETFs | GLD | $125 | –$424 | 83% |
+     | ETFs | SLV | $33 | –$103 | 81% |
+     | Stocks | AAPL | $431 | –$1,425 | 76% |
+     | Stocks | GOOGL | $1,108 | –$2,886 | 80% |
+     | Stocks | AMZN | $1,041 | –$2,215 | 78% |
 
- 3. 
+
+     可见ETF有高的**POP** 由于他们的波动性低，导致成功的概率会高。 但是，股票**高**的波动性带来大的收益（代价是少许降低的POP）
+
+     其实无论股票或是ETF， 期权价格是和 标的物的价格 有关。
+     比如  ：
+       same IV, duration and $\Delta$  --> options prices 和 prices 相关。
+       ### Table - Two sample options underlyings with the same IV but differing stock and put prices 
+
+      | Option Parameters | Scenario A | Scenario B |
+      | --- | --- | --- |
+      | Stock Price | $100 | $200 |
+      | IV | 33% | 33% |
+      | 45 DTE 16 $\Delta$ Put Price | $1 | $2 |
+
+      在情景A中，看跌期权价格为1美元（基础价格的1%）。由于期权定价的高效性，情景B中的空头看跌期权价格也将是基础价格的1%，因为两种资产具有相同的隐含波动率。产品的中立性表明，没有任何一种（流动性）基础资产本质上比另一种更优越，仅仅是不同资产之间存在比例权衡。股票的高风险、高回报性质并不本质上比ETF的相对稳定性更好或更差，但某些资产可能更适合个人交易者。因此，我们可以得出结论，选择基础资产基本上取决于五个主要因素（按重要性排序）：
+
+      - 1.期权市场的流动性   
+      - 2.交易的BPR相对于账户规模的大小   
+      - 3.基础资产的隐含波动率 
+      - 4.每笔交易所需的P/L波动幅度、结束P/L的变化以及尾部风险暴露的大小 
+      - 5.所偏好的公司、行业或市场暴露 
+        
+
+ 3. Choose a Contract Duration
+
+    对于卖期权的合同期限的选择有以下的考量：
+
+    - 短期 （ < 30 天 ）: 由于$\gamma$ 随着接近到期日变大， P/L 也会**变化**很大，这是不希望看到的。另外，在选择同样的$\Delta\的price strike 时候，会太靠近当前股价，从而跟容易受$\gamma$的影响。
+    - 长期  ( > 60 天 ）: P/L 是不会波动很大，但是占用 Buy Power， 不利于资金的利用。
+    - 中期 （ 30 < DTE < 60 天 ） ：
+       + 作为卖方，要反复交易以提高交易次数，从而令profit更接近**统计意义的优势**。
+       + 如果有选举，财报等事件， 一般会令IV 升高，这是可根据事件性质选择DTE. 短期事件，就选短一些的期权卖， 长期事件，就选DTE长的。 
+      
 
 
  
 
- 4. 
+ 5. 
