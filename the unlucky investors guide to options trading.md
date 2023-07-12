@@ -215,7 +215,7 @@ market volatility, using SPY strangle data from 2005–2021.
      
  5.  Choose a Directional Assumption  - 推荐 中性 如 **short strangle** 或者 **Iron Condor**
 
-     ### Table - Examples of popular short options strategies with the   same $\Delta$ of approximately **20**,  $\Delta$ = 16 for Short Strngle and $\Delta$ = 10 for long leg of Iron Condor 
+        ### Table - Examples of popular short options strategies with the   same $\Delta$ of approximately **20**,  $\Delta$ = 16 for Short Strngle and $\Delta$ = 10 for long leg of Iron Condor 
 
         | Strategy          | Composition                              | Defined or Undefined Risk | Directional Assumption | POP   |
         |-------------------|------------------------------------------|---------------------------|------------------------|-------|
@@ -226,4 +226,68 @@ market volatility, using SPY strangle data from 2005–2021.
         | Strangle          | Short OTM put, short OTM call           | Undefined                 | Neutral                | 70%   |
         | Iron Condor       | Short OTM vertical call spread,         | defined                          |    Neutral                    |   60%    |
         |                   | short OTM vertical put spread           |                |                        |       |
- 
+     
+     - Iron Condor 宽度的选择
+
+       ### Table Statistical comparison of 45 DTE 16𝛥 SPY iron condors with different wing widths, held to expiration from *2005–2021*. Wings that have a smaller $\Delta$ are further from ATM compared to wings with a larger $\Delta$. Included are 45 DTE 16𝛥 SPY strangle statistics held to expiration from *2005–2021* for comparison   
+      | 16𝜟 Iron Condor Statistics (2005–2021) | | | |16𝜟 Strangle Statistics (2005–2021) |
+      | --- | --- | --- | --- | --- |
+      | Statistics | **5𝜟 Wings** | 10𝜟 Wings | 13𝜟 Wings | 2005-2021 |
+      | POP | **79%** | 75% | 73% | ${\color{green}81}$% | 
+      | Average P/L | **$35** | $15 | $6 | ${\color{green}$44}$ |
+      | Standard Deviation of P/L | **$251** | $132 | $74 | ${\color{green}$614}$ |
+      | Conditional Value at Risk (CVaR) (5%) | **−$771** | −$399 | −$220 | ${\color{green}−$1,535}$ |
+
+     宽的iron Condor Win !!!   
+      + 盈利更多 （ **35** ） 
+      + POP更大 （ **79%** ）。这意味着**胜率**更高
+
+      **short Strnagle** 有最大的POP 和 P／Ｌ．　但风险和 BPR 也大。  
+
+     ### Table - Average BPR comparison of 45 DTE 16𝛥 SPY strangles and 45 DTE 16𝛥 SPY iron condors with 10𝛥 wings when held to expiration using data from 2005–2021.
+
+      | VIX Range | Strangle BPR | Iron Condor BPRa |
+      | --- | --- | --- |
+      | 0–15 | $3,270 | $363 |
+      | 15–25 | $2,641 | $426 |
+      | 25–35 | $2,261 | $585 |
+      | 35–45 | $1,648 | $553 |
+      | 45+ | $1,445 | $615 |
+
+     **策略**
+     ```
+     - Low IV 时候  -> Short width wing Iron Condor,另外，由于低的BPR，则可以占用多一些的资金。
+     - When IV 变高 -> 转 去 Short Strangle 策略， 利用它的高收益和高POP。
+     ```  
+     
+ 6.  Choose a $\Delta$
+
+     ## Table 1 - Statistical comparison of 45 DTE SPY strangles of different deltas, held to expiration from 2005–2021.
+        | Statistics | 16𝜟 | 20𝜟 | 30𝜟 |
+        | --- | --- | --- | --- |
+        | POP | 81% | 76% | 68% |
+        | Average P/L | $44 | $49 | $54 |
+        | Standard Deviation of P/L | $614 | $659 | $747 |
+        | CVaR (5%) | −$1,535 | −$1,673 | −$1,931 |
+
+
+     ## Table 2 - Average BPRs of 45 DTE SPY strangles with different deltas, sorted by IV from 2005–2021.
+       | VIX Range | 16𝜟 | 20𝜟 | 30𝜟 |
+       | --- | --- | --- | --- |
+       | 0–15 | $3,270 | $3,366 | $3,573 |
+       | 15–25 | $2,641 | $2,756 | $3,014 |
+       | 25–35 | $2,261 | $2,415 | $2,794 |
+       | 35–45 | $1,648 | $1,715 | $2,058 |
+       | 45+ | $1,445 | $1,421 | $1,520 |
+
+
+     ## Table 3 - Probability of incurring a loss exceeding the BPR for 45 DTE SPY strangles of different deltas, held to expiration from 2005–2021.
+      | Strangle Delta | Probability of Loss Greater Than BPR |
+      | --- | --- |
+      | 16𝛥 | 0.90% |
+      | 20𝛥 | 0.93% |
+      | 30𝛥 | 1.0% |
+
+     **策略**
+     
+     ```当IV增加时，关闭现有头寸并重新开仓，使用调整后的行权价更好地反映新的波动率条件是一个好的做法。```
