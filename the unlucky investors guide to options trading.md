@@ -347,7 +347,7 @@ market volatility, using SPY strangle data from 2005–2021.
        | 50% or Exp. | $1.67 | 24 |
        | 75% or Exp. | $1.49 | 34 |
        | 100% (Exp.) | $1.29 | 44 |
-       | 21 DTE | ${\color{green}$1.60、} | 24 |
+       | 21 DTE | ${\color{green}$1.60}$ | 24 |
 
      一般
      + defined risk position ( 像iorn condor )  -> 可以应用 50% 或更低的比例 为止盈点。这背后的逻辑是， defined short positions 本身的特性就决定了 P/L 波动不大，就是说到达高盈利的机会不大，是缓慢的实现盈利的。所以，低一些的止盈目标有利于早些时候关仓，从而实现有效资金利用。
