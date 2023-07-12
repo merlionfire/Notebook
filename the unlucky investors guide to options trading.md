@@ -188,8 +188,42 @@ market volatility, using SPY strangle data from 2005–2021.
        + 作为卖方，要反复交易以提高交易次数，从而令profit更接近**统计意义的优势**。
        + 如果有选举，财报等事件， 一般会令IV 升高，这是可根据事件性质选择DTE. 短期事件，就选短一些的期权卖， 长期事件，就选DTE长的。 
       
+ 4. Choose defined or Undefined Risk
 
+    - Defined  <- 适合小账户，初学者
+      + 风险有限，占用的资金（BPR） 少，P/L 在存续期内波动不大
+      + 但是POP 低， 潜在的收益也低，由于多条腿，开关仓的成本也高
+     
+    - **Undefined**  <-  推荐
+      + 风险无限，占用的资金（BPR） 大，P/L 在存续期内波动大
+      + 但是POP高， 潜在的收益也高。         
 
+    -   卖期权的资金分配
+
+        |   | Undefined Risk Allocation |   defined Risk Allocation |
+        | --- | --- | --- |
+        | 占用可用资金 | > 75% | < 25 % |
+        | 每笔的BPR占总资金| < 7%  | < 5% | 
+
+        例子 ：  Portfolio allocation for defined and undefined risk strategies with a **$100,000** portfolio at different VIX levels.
+         
+        | VIX Level | Maximum Portfolio Allocation | Minimum Undefined Risk Allocation | Maximum Defined Risk Allocation |
+        |-----------|-------------------------------|----------------------------------|-------------------------------|
+        | 20        | $30,000                      | $22,500= *$30,000 x 75 %* ($7,000 = *$100,000 x 7%* max BPR per trade) | 7,500 ($5,000 max BPR per trade)   |
+        | 40        | $50,000                      | $37,500 ($7,000 max BPR per trade) | $12,500 ($5,000 max BPR per trade) |
+
+     
+ 5.  Choose a Directional Assumption  - 推荐 中性 如 **short strangle** 或者 **Iron Condor**
+
+     ### Table - Examples of popular short options strategies with the   same $\Delta$ of approximately **20**,  $\Delta$ = 16 for Short Strngle and $\Delta$ = 10 for long leg of Iron Condor 
+
+        | Strategy          | Composition                              | Defined or Undefined Risk | Directional Assumption | POP   |
+        |-------------------|------------------------------------------|---------------------------|------------------------|-------|
+        | Naked Option      | Short OTM put                           | Undefined                 | Bullish                | 80%   |
+        |                   | Short OTM call                          | Undefined                 | Bearish                | 80%   |
+        | Vertical Spread   | Short OTM put, long further OTM put     | Defined                   | Bullish                | 77%   |
+        |                   | Short OTM call, long further OTM put    | Defined                   | Bearish                | 77%   |
+        | Strangle          | Short OTM put, short OTM call           | Undefined                 | Neutral                | 70%   |
+        | Iron Condor       | Short OTM vertical call spread,         | defined                          |    Neutral                    |   60%    |
+        |                   | short OTM vertical put spread           |                |                        |       |
  
-
- 5. 
