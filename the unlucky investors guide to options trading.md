@@ -302,8 +302,55 @@ market volatility, using SPY strangle data from 2005–2021.
      
       
    
-  2. 方法一  按固定好的时间关仓
+  2. 方法一  按固定好的**时间**关仓
 
-      - 好处是，好操作（类似于机械操作)，资金周转率可测，尤其适合DTE比较长的合同。虽然DTE后程，利润实现的更多，更快。但是尾部事件可能会造成灾难。   
+      - 好处是，好操作（类似于机械操作)，资金周转率可测，尤其适合DTE比较长的合同。虽然DTE后程，利润实现的更多，更快。但是尾部事件可能会造成灾难。
+      - 距离到期日多久关仓比较好呢？
+    
+      ## Table - Statistics for 45 DTE 16𝛥 SPY strangles from 2005–2021 managed at different times in the contract duration. Average P/L is ${P/L / Credit}$
  
-   
+      | Management DTE | Probability of Profit (POP) | Average P/L | Average Daily P/L | P/L Standard Deviation | Conditional Value at Risk (CVaR) (5%) |
+      | --- | --- | --- | --- | --- | --- | 
+      | 40 DTE | 67% | 2.3% | $0.23 | 73% | –206% |
+      | 30 DTE | 73% | 10% | **$1.75** | 88% | –212% |
+      | 21 DTE | 79% | 21% | **$1.60** | 96% | –283% |
+      | 15 DTE | 78% | **25%** | $1.51 | 105% | –304% |
+      | 5 DTEa | 82% | **33%** | $1.34 | 185% | –514% |
+      | Expiration | 81% | 28% | $1.29 | 247% | –708% |
+    
+     **策略**
+     
+     ```Trade-off 是 DTE/2 关仓，比如上表中的 21 DTE， 有高的 Average Daily P/L， 有利于资金周转和提高交易次数，而79%的利润也相当不错```
+
+
+  3. 方法二  按固定**止盈目标**关仓
+
+     就是如果仓位提前到达一定比例的（25%,50%...%75, 100%) 利润点，就止盈。 否则就等到期权到期。 
+     ## Table - Statistics for 45 DTE 16𝛥 SPY strangles from 2005–2021 managed at different profit targets. If the profit target is not reached during the contract duration, the strangle expires. The final row includes statistics for 45 DTE 16𝛥 SPY strangles managed around halfway to expiration (21 DTE) as a reference.
+ 
+      | Profit Target | POP | Average P/L | P/L Standard Deviation | Probability of Reaching Target | CVaR (5%) |
+      | --- | --- | --- | --- | --- | --- |
+      | 25% or Exp. | 96% | 11% | 191% | 96% | −522% |
+      | 50% or Exp. | 91% | 16% | 236% | 90% | −654% |
+      | 75% or Exp. | 84% | 22% | 245% | 80% | −699% |
+      | 100% (Exp.) | 81% | 28% | 247% | 52% | −708% |
+      | **21 DTE** | **79%** | **21%** | **96%** | N/A | **−283%** |
+
+      Remark:
+      这个策略普遍有**高**的 P/L Standard Deviation，可见该方法的P/L 波动太大。 25%的止盈虽然有高一些的POP,可是Average P/L太低了，不值得。
+
+
+      ## Table - Average daily P/L and average duration for the contracts and management strategies described in Table 6.2.
+       | Profit Target | Average Daily P/L Over Average Duration | Average Duration (Days) |
+       | --- | --- | --- |
+       | 25% or Exp. | $1.75 | 15 |
+       | 50% or Exp. | $1.67 | 24 |
+       | 75% or Exp. | $1.49 | 34 |
+       | 100% (Exp.) | $1.29 | 44 |
+       | 21 DTE | ${\color{green}$1.60、} | 24 |
+
+     一般
+     + defined risk position ( 像iorn condor )  -> 可以应用 50% 或更低的比例 为止盈点。这背后的逻辑是， defined short positions 本身的特性就决定了 P/L 波动不大，就是说到达高盈利的机会不大，是缓慢的实现盈利的。所以，低一些的止盈目标有利于早些时候关仓，从而实现有效资金利用。
+     + Undefined risk position ( 如上表的short strangle ), 波动大，提高一些止盈点如 50% - 75%, 到达的可能比有保护的策略大多了。所以值得提到止盈点，以期提高一下单次交易的利润值，当然这可能要令仓位多留一些时间。  
+      
+     
