@@ -349,7 +349,8 @@ market volatility, using SPY strangle data from 2005–2021.
        | 100% (Exp.) | $1.29 | 44 |
        | 21 DTE | ${\color{green}$1.60}$ | 24 |
 
-     一般
+
+     **策略**
      + defined risk position ( 像iorn condor )  -> 可以应用 50% 或更低的比例 为止盈点。这背后的逻辑是， defined short positions 本身的特性就决定了 P/L 波动不大，就是说到达高盈利的机会不大，是缓慢的实现盈利的。所以，低一些的止盈目标有利于早些时候关仓，从而实现有效资金利用。
      + Undefined risk position ( 如上表的short strangle ), 波动大，提高一些止盈点如 50% - 75%, 到达的可能比有保护的策略大多了。所以值得提到止盈点，以期提高一下单次交易的利润值，当然这可能要令仓位多留一些时间。  
       
@@ -384,7 +385,9 @@ market volatility, using SPY strangle data from 2005–2021.
 
       - 与其他管理策略的结合：在更活跃的交易场景中，止损通常与其他管理策略结合使用。这种方法允许交易者使用多种工具和技术根据市场情况和个人交易目标调整仓位。
     
-
+     **策略**
+     
+     ```-200% 作为止损点```
 
 
   5. 综合比较
@@ -438,6 +441,35 @@ market volatility, using SPY strangle data from 2005–2021.
 
        +  对于 passively（被动型）交易者而言，如果其投资组合可以承受更多的异常风险，那么仅使用止损，其他情况下则将交易持有至到期日，以尽可能提取现有仓位的外在价值可能更有意义。
        +  对于可以承受更多异常风险的 active（积极型）交易者而言，可以将普通仓位管理在固定的盈利目标上，并在到期日前半程关闭风险较高、回报较高的交易。
-       +  非常积极型的交易者可以在所有未定义风险合约中，要么在初始收益的50%处，要么在合约期限的一半处进行管理，因为这种方法优先考虑调节异常风险，并实现可能的合理规模的盈利。 这就是上面提到的 c``21 DTE or 50% Profit`` 策略。
+       +  非常积极型的交易者可以在所有未定义风险合约中，要么在初始收益的50%处，要么在合约期限的一半处进行管理，因为这种方法优先考虑调节异常风险，并实现可能的合理规模的盈利。 这就是上面提到的 ``21 DTE or 50% Profit`` 策略。
 
+     - 重要提示
+    
+       + 以上的仓位管理策略是针对undefined. 对于有保护的策略，如iron condor， 因为有最大loss的存在，不用考虑提前关仓。
+       + 以上策略是长期的回测结果。 但是不同的退出策略在不同时期会有完全不同的P/L。 可以说 和入场时间时候的市场状况，尤其是IV的变化特性，有很大关系。
+         例如：
+         同样应用 `２１DTE`　退出策略，　**２０２０－２０２１**　就很好， 但是 在**2018 - 2020** 年，就很差。
+
+# Chapter 7 Basic Portfolio Management
+ - 资本配置和头寸规模
+   建议把资金分成两部分
+   + 核心头寸
+     - 标的物 ： ETF
+     - 资金配额 ： 75% of **可动用资金** （ 25 % when Low IV and 50 % when High IV of 总资产 ）
+     - 特点 ： 获利稳定，持续，暴险不大
+   + 补充头寸
+     - 标的物 ： 各大股票
+     - 资金配额 ： 25% of **可动用资金** （ 25 % when Low IV and 50 % when High IV of 总资产 ）
+     - 特点 ： 为了参与市场，获利高（因为一般IV 过高，期权的溢价高 ） ，但风险也大
+    
        
+     ## Table - Statistics for 45 DTE 16𝛥 strangles from 2011–2020, managed at expiration. Included are examples for core and supplemental position underlyings.
+      | Position | Underlying | POP | Average Profit | Average Loss | Conditional Value at Risk (CVaR) (5%) |
+      | --- | --- | --- | --- | --- | --- |
+      | Core | SLV | 84% | $32 | −$88 | −$201 |
+      | | QQQ | 74% | $109 | −$183 | −$454 |
+      | | SPY | 80% | $162 | −$320 | −$800 |
+      | | GLD | 81% | $119 | −$456 | −$1,100 |
+      | Supplemental | AAPL | 74% | $425 | −$1,443 | −$4,771 |
+      | | GOOGL | 80% | $1,174 | −$2,955 | −$6,593 |
+      | | AMZN | 77% | $1,235 | −$2,513 | −$6,810 |
