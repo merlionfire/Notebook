@@ -473,3 +473,9 @@ market volatility, using SPY strangle data from 2005–2021.
       | Supplemental | AAPL | 74% | $425 | −$1,443 | −$4,771 |
       | | GOOGL | 80% | $1,174 | −$2,955 | −$6,593 |
       | | AMZN | 77% | $1,235 | −$2,513 | −$6,810 |
+     
+ - 资本配置的多样化
+   例如
+   + 分配不同比例的资金到 ETF， Low IV 和 High IV 资产
+   + 配置**不相关**，甚至**负相关**的资产。
+  
