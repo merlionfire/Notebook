@@ -478,4 +478,30 @@ market volatility, using SPY strangle data from 2005–2021.
    例如
    + 分配不同比例的资金到 ETF， Low IV 和 High IV 资产
    + 配置**不相关**，甚至**负相关**的资产。
+   ## Table - The five-year correlation history for the assets through these relationships fluctuate with time over short timescales, they are assumed to remain relatively constant long term.
+      | Asset | Symbol | SPY | QQQ | GLD | TLT | AMZN | AAPL |
+      | --- | --- | --- | --- | --- | --- | --- | --- |
+      | Market ETFs | SPY | $${\color{lightgreen}1.0}$$ | 0.89 | -0.13 | -0.33 | 0.62 | 0.64 |
+      | Market ETFs | QQQ | $${\color{lightgreen}0.89}$$ | 1.0 | -0.12 | -0.26 | 0.75 | 0.74 |
+      | Low Volatility Assets | GLD | $${\color{red}-0.13}$$ | -0.12 | 1.0 | 0.39 | -0.12 | -0.11 |
+      | Low Volatility Assets | TLT | $${\color{red}-0.33}$$ | -0.26 | 0.39 | 1.0 | -0.18 | -0.22 |
+      | High Volatility Assets | AMZN | 0.62 | 0.75 | -0.12 | $${\color{red}-0.18}$$ | 1.0 | 0.50 |
+      | High Volatility Assets | AAPL | 0.64 | 0.74 | -0.11 | $${\color{red}-0.22}$$ | 0.50 | 1.0 |  
   
+      当配置ETF时候，也要考虑将不相关或负相关的ETF组合一下，比如下表, 表示出
+      + 单独的SPY或QQQ会令总头寸面临比较大概率的损失( ~5.8% or 3.9%)
+      + 如果是SPY 和 GILD或TLT （见上表，这两个几乎是负相关）组合， 头寸遭受大规模损失的概率会**大大降低**
+     ## Table - The probability of outlier losses (worse than 200% of the initial credit) occurring simultaneously for different types of 16𝛥 strangles held to expiration from 2011 to 2020. All contracts have approximately the same duration (45 DTE), open and close dates. The diagonal  entries correspond to the probability of the specific strategy incurring an outlier loss individually, and the off-diagonal entries correspond to the probability of the pair incurring outlier losses simultaneously. Probability of Loss Worse than 200Statistics for 45 DTE 16𝛥 strangles from 2011–2020, managed at expiration. Included are examples for core and supplemental position underlyings.        
+
+      | Asset | SPY | QQQ | GLD | TLT |
+      | --- | --- | --- | --- | --- |
+      | SPY | **5.8%** | 3.9% | 2.1% | 1.9% |
+      | QQQ | **3.9%** | 8.7% | 1.9% | 1.7% |
+      | GLD | *2.1%* | 1.9% | 12% | 4.8% |
+      | TLT | *1.9%* | 1.7% | 4.8% | 12% |
+   
+   Remark : 
+   ``尽管用不相关的资产多元化来降低损失，是有效果的。但是，还是有可能发生大的损失(如 1.9%), 这就需要让仓位尽可能的小，以希防止意外损失``
+   
+ - 通过监控**希腊字母**来控制风险      
+     
