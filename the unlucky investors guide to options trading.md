@@ -533,4 +533,22 @@ market volatility, using SPY strangle data from 2005–2021.
      - 建议 **0.05% ~ 01.%**  (  $\theta \space ratio$ ),但不能大于 0.2%
      - theta ratio 不能太大的背后逻辑是：
        **𝜃**和**Gamma (𝛤)**是 **正相关的**,高**𝜃**固然利于利润实现，但**Gamma**也会变大，造成仓位的不稳定。如果高**𝜃**存在，则需要再平衡仓位，rolling当前仓位，或直接关了，在在开仓于别的期权。
-      
+       
+ - DTE多样化
+   考虑到期权在临近到期日的时候P/L Dev 会比较大，所以，可以让所以组合有不同的DTE以期望减少单个仓位对整体P/L的影响。 但是这种策略很难回测和量化
+
+ - 期权策略的多样化
+   可以建立有保护的期权和裸期权的混合仓位，这样会在 **P/L**和**风险**中达成trade-off. 如下表中Combined 组合会在2020下跌中少一些损失
+
+   ## Table - Statistical analysis of the three portfolios first four statistics (POP, average P/L, standard deviation of P/L, and conditional value at risk (CVaR)) gauge portfolio performance during more regular market  conditions (2005–2020). The final column gives the worst-case drawdown from the 2020 sell-off (the cumulative losses from February to March 2020).
+
+      | | 2005  | - |- | 2020 | 2020  Sell-off |
+      | --- | --- | --- | --- | --- | --- |
+      | Portfolio Type | POP | Average P/L | Standard Deviation of P/L | CVaR (5%) | Worst-Case Drawdowns |
+      | Strangle | 76% | $379 | $1,803 | -$5,174 | -$77,520 |
+      | **Combined** | 75% | $221 | $1,275 | -$3,648 | -$45,080 |
+      | Iron Condor | 67% | $64 | $799 | -$2,324 | -$12,640 |
+
+
+
+
