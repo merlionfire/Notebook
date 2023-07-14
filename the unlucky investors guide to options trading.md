@@ -580,8 +580,14 @@ market volatility, using SPY strangle data from 2005–2021.
    | --- | --- | --- |
    | SPY Strangle | 79% | 1.4% |
    | QQQ Strangle | 73% | 1.0% |
-   | GLD | Strangle | 84% | 1.9% |
+   | GLD Strangle | 84% | 1.9% |
 
+   总的来说，这些分配百分比相当低，因为凯利准则主张进行许多小的、不相关的投注。当试图分配25%到50%的投资组合购买力时，严格遵守这些投注大小有些不切实际；因为没有足够的不相关的基础资产。无风险利率的价值为理想的资本配置提供了保守估计，因此扩大这些百分比并采取更积极的方法是合理的。为了在不违反资本配置指南的情况下扩大这些百分比，可以使用这些投注大小作为启发式方法来估计资本配置的比例，而不是明确的百分比。例如，与其按照POP权重分配，更启发式的方法如下：
+
+   + According to initial estimates, 1.4% of portfolio buying power should be allocated to SPY strangles and 1.9% to GLD strangles.
+   + Dividing by 1.9, these weights correspond to a ratio of approximately 0.74:1.0.
+   + This means that SPY strangles should occupy roughly 0.74 times the portfolio buying power of GLD strangles.
+   +  If the maximum per-trade allocation of 7% goes toward GLD strangles,then approximately ``5.2% (derived from 0.74 × 7% = 5.2%)  `` should be allocated to SPY strangles.
 
    继续这个例子，假设分配给SPY窄幅和QQQ窄幅的资本进一步分裂。虽然这些基础资产是相关的，但在这些头寸之间分配资本比将整个5.2％分配给一个基础资产实现了更多的多样化。这个过程也可以使用POP权重来估计： 
    +  根据初步估计，应将1.4％的组合购买力分配给SPY窄幅，1.0％分配给QQQ窄幅。
