@@ -549,6 +549,95 @@ market volatility, using SPY strangle data from 2005–2021.
       | **Combined** | 75% | $221 | $1,275 | -$3,648 | -$45,080 |
       | Iron Condor | 67% | $64 | $799 | -$2,324 | -$12,640 |
 
+ - 根据 **POP** 进行头寸平衡
+   根据凯莉公式 ：
+   + expected change in bankroll after one play is given by ``pb − q``
+ ```math   
+   e^{rt}-1 \approx rt =  pb - q
+```
+   + Optimal fraction of the bankroll to allocate to this trade
+```math   
+   b = \frac{rt+q}{p}=\frac{1+rt}{p}-1
+ ```  
+
+ ```math
+    f = p - \frac{q}{b} = p - \frac{1-p}{\frac{1}{p}(1+rt)-1 }
+ ```
+
+ ```math
+    f = r\cdot t\cdot \frac{p}{1-p} 
+ ```
+
+ ```math
+    f = r\cdot\frac{DTE}{356}\cdot\frac{POP}{1-POP} 
+ ```
+
+   如果按照这个凯莉公式来安排资金分配，有如下的回测比例
+   ## Table - POPs and allocation percentages of buying power for 45 DTE 16𝛥 SPY, QQQ, and GLD strangles from 2011–2018. 
 
 
+   | Symbol | POP | Allocation Percentages |
+   | --- | --- | --- |
+   | SPY Strangle | 79% | 1.4% |
+   | QQQ Strangle | 73% | 1.0% |
+   | GLD | Strangle | 84% | 1.9% |
 
+
+   继续这个例子，假设分配给SPY窄幅和QQQ窄幅的资本进一步分裂。虽然这些基础资产是相关的，但在这些头寸之间分配资本比将整个5.2％分配给一个基础资产实现了更多的多样化。这个过程也可以使用POP权重来估计： 
+   +  根据初步估计，应将1.4％的组合购买力分配给SPY窄幅，1.0％分配给QQQ窄幅。
+   +  通过2.4％（从1.4％+1.0％）进行划分，这些权重对应于大约0.58：0.42的比率。
+   +  这意味着SPY窄幅应占资本分配的58％，QQQ窄幅应占42％。
+   +  如果最多可以分配5.2％的头寸，则组合资本的3.0％应用于SPY窄幅，2.2％应用于QQQ窄幅。
+
+
+- **例子** （多种策略一起考虑）
+   + 步骤1：使用过去的数据确定适当的基础资产。核心头寸应具有适度的P / L标准偏差和良好的多元化基础资产。ETF，例如下表中的ETF，是核心头寸基础资产的可行候选者。尽管市场ETF高度相关，但足够数量的不相关和反相关资产可以实现合理的特异性风险降低。
+   ## Table -  Correlations between different ETFs from 2011–2018. Included are two market ETFs (SPY, QQQ), a gold ETF (GLD), a bond ETF (TLT), a currency ETF (FXE - Euro), and a utilities ETF (XLU).  
+
+   | Sector | Symbol | SPY | QQQ | GLD | TLT | FXE | XLU |
+   | --- | --- | --- | --- | --- | --- | --- | --- |
+   | Market ETFs | SPY | 1.0 | 0.88 | -0.02 | -0.44 | 0.16 | 0.49 |
+   | Market ETFs | QQQ | 0.88 | 1.0 | -0.03 | -0.36 | 0.12 | 0.35 |
+   | Diversifying ETFs | GLD | -0.02 | -0.03 | 1.0 | 0.19 | 0.34 | 0.08 |
+   | Diversifying ETFs | TLT | -0.44 | -0.36 | 0.19 | 1.0 | -0.03 | -0.04 |
+   | Diversifying ETFs | FXE | 0.16 | 0.12 | 0.34 | -0.03 | 1.0 | 0.18 |
+   | Diversifying ETFs | XLU | 0.49 | 0.35 | 0.08 | -0.04 | 0.18 | 1.0 |
+
+
+   + 步骤2： 计算应分配给每个头寸的投资组合资本的百分比。这些百分比可以使用上面的方程，并根据前一节中描述的方法进行缩放，如表8.4所示。 表8.4中显示的核心头寸具有高POP，具有适度的P / L标准偏差，并且具有良好的多元化基础，分配金额低于每笔交易购买力的7％上限。 分配给短期溢价的总投资组合购买力占30％，足以满足此回测的最低25％。使用2011年至2018年初的数据初始化投资组合后，现在可以在2018年初至2019年底的新数据上进行回测，但请记住，此测试不考虑动态管理或隐含波动率
+   ## Table -  Core position statistics for 45 DTE 16𝛥 strangles from 2011–2018. The allocation ratio is the allocation percentages normalized such that the largest bet size is set to 1.0. The portfolio weights are determined by multiplying the allocation ratio by 7% (the maximum per-trade allocation percentage). The adjusted portfolio weights show how portfolio capital is split across assets that are highly correlated.
+
+   | ETF | POP  | allocation Percentages |
+   | --- | --- | --- |
+   | SPY Strangle | 79% | 1.4% |
+   | QQQ Strangle | 73% | 1.0% |
+   | GLD Strangle | 84% | 1.9% |
+   | TLT Strangle | 78% | 1.3% |
+   | FXE Strangle | 83% | 1.8% |
+   | XLU Strangle | 81% | 1.6% |
+  
+   | Weights | SPY/QQQ :  GLD : TLT : FXE : XLU |  
+   | --- | --- |
+   | Allocation Ratio | 0.74:1.0:0.68:0.95:0.84   |
+   | Portfolio Weights | 5.2% : 7.0% : 4.8% : 6.7% : 5.9% |
+   | Adjusted Portfolio Weights | 3.0% : 2.2% : 7.0% : 4.8% : 6.7% : 5.9% |
+
+    + 回测结果：
+   ## Table -  Portfolio backtest performance statistics for the three portfolios described in Figure 8.3 from 2018–2019
+   | Portfolio Type | POP | Average P/L | Standard Deviation of P/L | Worst Loss |
+   | --- | --- | --- | --- | --- |
+   | SPY Equity | 60% | $285 | $2,879 | −$6,319 |
+   | Equal-Weight | 67% | $26 | $2,440 | −$6,117 |
+   | POP-Weighted | 67% | $268 | $1,610 | −$3,561 |
+
+  
+  **where**
+  Portfolio performance of three different portfolios from early 2018 until September of 2019. Each portfolio has $200,000 in initial capital with 30% of the portfolio capital allocated. This initial amount of $200,000 allows at least one trade for each type of position, as $100,000 in initial capital does not.
+   - The 30% SPY equity portfolio (a) has 30% allocated to shares of SPY.
+   - The 30% equally-weighted strangle portfolio (b) has 5% allocated to each of the six types of strangles
+   - 30% POP-weighted portfolio (c) has the 30% weighted according to the percentages in Table 8.4.
+       
+  All contracts have the same delta (16𝛥),  identical durations (roughly 45 DTE), and the same open and close dates. For the sake of comparison, the trades in the equity portfolio are opened on the first of each month and closed at the end of each month.
+
+
+   有趣的是，上表显示，尽管股票组合的尾部敞口小于期权组合，但股票组合是三个组合中波动性最大、经历最大最坏情况回撤的。基于POP加权的组合表现更加稳定，每次交易标准差显著低于其他两个组合，每次交易的POP与等权重组合相匹配，平均盈亏与股票组合相当。尽管基于POP加权的组合由未定义的风险策略组成，但在回测期间，其盈亏变动性和最坏情况损失几乎只有股票组合的一半。等权重跨式组合的表现也不如基于POP加权的组合，尽管与股票组合的相似组合相比，其盈亏变化或严重回撤并没有更多。再次强调，通过根据市场波动性增加分配比例（可以通过添加不相关的短期权头寸来实现）或者纳入更复杂的管理策略，可以进一步优化两种跨式组合的表现。尽管如此，这个简化的回测说明了资本分配、多样化和基于POP加权分配等风险管理技术的影响。基于凯利准则得出的POP 1−POP 启发式提供了一个很好的指导，可以在初始化组合时确定应该分配多少资本给一个交易，表明应该将更多的资本分配给更高的POP交易，将较少的资本分配给不太可靠的交易。然而，这种方法并没有为动态组合管理提供一个全面的结构。在不同的时间点，交易经常达到盈利或亏损目标，需要重新定位执行价格，或者提供新的机会。交易员可以通过选择相同的合同期限或管理策略来简化复杂的管理过程
