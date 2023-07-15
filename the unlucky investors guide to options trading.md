@@ -674,5 +674,38 @@ market volatility, using SPY strangle data from 2005–2021.
  - 但是二值事件也有非常有利于交易的属性
    + 发动，结束时间比较短，意味着交易的获利的时间短，有利于资金的效率
    + 高风险意味着高回报，高手视为赚大钱快钱的良机
-   + 需要跟仓，动态调仓。有利于初学者学习期权调仓技术。 　
+   + 需要跟仓，动态调仓。有利于初学者学习期权调仓技术。
+    
+ - 3个大科技股的二元事件的统计结果 ：
+
+   ## Table :　Statistics for 45 days to expiration (DTE) 16𝛥 AAPL strangles from 2005–2020. Trades are opened the day before an earnings report and closed either one, five, 10, or 20 days after earnings.
+   | Day Position Is Closed Relative to Earnings | POP  | Average P/L | Standard Deviation of P/L | Conditional Value at Risk (CVaR) (5%) |
+   |--------------------------------------------|------|-------------|---------------------------|--------------------------------------|
+   | **Day After**                                  | 72%  | ${\color{green}$85}$         | $203                      | –$405                                |
+   | 5 Days After                               | 70%  | $43         | $400                      | –$1,027                              |
+   | 10 Days After                              | 61%  | $60         | $408                      | –$1,025                              |
+   | 20 Days After                              | 56%  | ${\color{red}–$34}$        | $660                      | –$1,976                              |
+     
   
+   ## Table :　Statistics for 45 DTE 16𝛥 AMZN strangles from 2005–2020. Trades are opened the day before an earnings report and closed either one, five, 10, or 20 days after earnings.
+
+   | Day Position Is Closed Relative to Earnings | POP  | Average P/L | Standard Deviation of P/L | CVaR (5%) |
+   |--------------------------------------------|------|-------------|---------------------------|-----------|
+   | **Day After**                              | 65%  | ${\color{green}$99}$         | $803                      | –$1,927   |
+   | 5 Days After                               | 65%  | $85         | $842                      | –$2,154   |
+   | 10 Days After                              | 72%  | $1          | $1,446                    | –$4,416   |
+   | 20 Days After                              | 76%  | ${\color{red}$78}$         | $1,540                    | –$4,477   |
+
+
+   ## Table : Statistics for 45 DTE 16𝛥 GOOGL strangles from 2005–2020. Trades are opened the day before an earnings report and closed either one, five, 10, or 20 days after earnings.
+   | Day Position Is Closed Relative to Earnings | POP  | Average P/L | Standard Deviation of P/L | CVaR (5%) |
+   |--------------------------------------------|------|-------------|---------------------------|-----------|
+   | **Day After**                                  | 75%  | ${\color{green}–$60}$       | $1,320                    | –$4,639   |
+   | 5 Days After                               | 67%  | –$113      | $1,358                    | –$4,724   |
+   | 10 Days After                              | 65%  | –$122      | $1,275                    | –$3,675   |
+   | 20 Days After                              | 71%  | ${\color{red}–$2}$        | $1,584                    | –$4,909   |
+ 
+   通过上面的表格，可以得出投机二值事件的准则
+
+   + 由于波动太大，需要用更小的资金投机二值事件。一般是是平常投资股票标的物期权的一半资金。
+   + 最好是季报之前开仓，季报之后马上关仓。 不要让期权保留太久，上表可见留得越久，损失越大。 
