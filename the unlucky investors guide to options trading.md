@@ -661,9 +661,7 @@ market volatility, using SPY strangle data from 2005–2021.
   
 
  ![IV indexes for different stocks from 2017–2020 AMZN ](https://github.com/merlionfire/Notebook/blob/main/image/AMZN_IV_around_earnings.png)
- ![IV indexes for different stocks from 2017–2020 AMZN ](https://github.com/merlionfire/Notebook/blob/main/image/AAPL_IV_around_Earnings.png) 
-
- 是否可以利用二值事件，通过期权盈利？
+ ![IV indexes for different stocks from 2017–2020 AMZN ](https://github.com/merlionfire/Notebook/blob/main/image/AAPL_IV_around_earnings_IV_around_Earnings.png)
  - 二值事件普遍有
    + 事件之前， IV **膨胀**
    + 事件之后， IV **收缩**
